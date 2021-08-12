@@ -1,0 +1,6 @@
+#!/bin/bash
+
+## Created By Aditya Shakya
+
+rofi -modi run,drun -opacity "80" -show window -show-icons -font "FreeSans 14" -drun-icon-theme "Papirus"
+	

@@ -1,0 +1,89 @@
+#https://i3wm.org/i3status/manpage.html
+#https://medium.com/hacker-toolbelt/my-i3status-customization-3e8ad6f0153a
+
+general {
+	output_format = "i3bar"
+        colors = true
+        interval = 5
+        color_good = "#487DF9"
+        color_separator = "#487DF9"
+        
+}
+
+order += "battery all"
+order += "read_file BRIGHTNESS"
+order += "volume master"
+order += "cpu_usage"
+order += "memory"
+order += "disk /"
+#order += "load"
+#order += "wireless _first_"
+#order += "ethernet _first_"
+order += "tztime local"
+
+volume master {
+        format = "  %volume"
+        format_muted = " mute"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+        
+}
+
+read_file BRIGHTNESS {
+        format = "Brillo    %content %"
+        path = ".config/brightness"
+        max_characters = 10
+}
+
+cpu_usage {
+        format= "CPU    %usage"
+        #format= "CPU  %usage <%cpu0 %cpu1>"
+        max_threshold= 75
+}
+
+wireless _first_ {
+        format_up = "  (%quality at %essid, %bitrate) "
+        #format_up = "W    (%quality at %essid, %bitrate) %ip"
+        format_down = ""
+}
+
+ethernet _first_ {
+        format_up = "  (%speed)"
+        format_down = ""
+}
+
+battery all {
+        format = "%status %percentage %remaining %emptytime"
+        format_down = ""
+        status_chr = " CHR"
+        status_bat = " BAT"
+        status_unk = " UNK"
+        status_full = " FULL"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = "  %A %Y-%m-%d  |    %I:%M %p"
+}
+
+load {
+        format = "%1min %5min %15min"
+}
+
+memory {
+        format = "RAM   %used"
+        #format = "RAM    %percentage_used"
+        threshold_degraded = "10%"
+        threshold_critical = "5%"
+        #memory_used_method = "memavailable"
+        format_degraded = "MEMORY: %free"
+}
+
+disk "/" {
+        format = "Disco    %percentage_used"
+}
+
+
+
